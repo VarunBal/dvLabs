@@ -183,8 +183,8 @@ def display_anno(img, img_anon, class_names, bbox_color=(0, 0, 0), class_colors=
 
         if show_labels:
 
-            if show_conf and yolo_bb_format.CONF in (obj.keys()):
-                show_label(img, f"{obj[yolo_bb_format.CLASS]} {obj[yolo_bb_format.CONF]}", bbox, font, lbl_pos,
+            if show_conf and (yolo_bb_format.CONF in obj.keys()):
+                show_label(img, f"{obj[yolo_bb_format.CLASS]} {round(obj[yolo_bb_format.CONF],2)}", bbox, font, lbl_pos,
                            class_color, txt_color)
             else:
                 show_label(img, f"{obj[yolo_bb_format.CLASS]}", bbox, font, lbl_pos, class_color, txt_color)
