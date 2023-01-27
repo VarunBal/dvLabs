@@ -204,6 +204,11 @@ class Analyse:
             else:
                 avg_IOUs.append(sum_iou/samples)
 
+        plt.bar(range(0, len(image_ids)), avg_IOUs)
+        plt.title('Average IOU per Sample')
+        plt.xlabel('Samples')
+        plt.ylabel('Average IOU')
+
         # Save mistakes annotations
         if save_dir is not None:
             with open(os.path.join(save_dir, "avg_iou_per_sample.txt"), 'w') as f:
@@ -213,10 +218,8 @@ class Analyse:
 
                     f.write(f"{img_name} {round(avg_iou, 3)}\n")
 
-        plt.bar(range(0, len(image_ids)), avg_IOUs)
-        plt.title('Average IOU per Sample')
-        plt.xlabel('Samples')
-        plt.ylabel('Average IOU')
+            plt.savefig(os.path.join(save_dir, "average_iou_per_sample.png"))
+
         plt.show()
 
     def per_class_ap(self, iou_thres, save_dir=".", print_ap=False, plot_ap=True):
