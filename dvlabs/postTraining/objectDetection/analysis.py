@@ -36,6 +36,8 @@ class Analyse:
         for f_cls in filter_classes:
             assert f_cls in self.class_names, "Filter class name not present in dataset."
 
+        print("Creating View...")
+
         resize_w, resize_h = round(resolution[0] / grid_size[0]), round(resolution[1] / grid_size[1])
 
         # Initialize video writer
@@ -174,6 +176,8 @@ class Analyse:
 
     def avg_iou_per_sample(self, save_dir=None):
 
+        print("Calculating avg IOU per sample...")
+
         if save_dir is not None:
             # Create directory if not present
             check_and_create_dir(save_dir)
@@ -224,6 +228,8 @@ class Analyse:
 
     def per_class_ap(self, iou_thres, save_dir=".", print_ap=False, plot_ap=True):
 
+        print("Calculating Average Precision...")
+
         if save_dir is not None:
             # Create directory if not present
             check_and_create_dir(save_dir)
@@ -271,6 +277,8 @@ class Analyse:
         return tp, fp, p, r, f1, ap, unique_classes
 
     def confusion_matrix(self, conf=0.25, iou_thres=0.45, normalize=True, save_dir=".", print_m=False, plot_m=True):
+
+        print("Creating Confusion Matrix...")
 
         if save_dir is not None:
             # Create directory if not present

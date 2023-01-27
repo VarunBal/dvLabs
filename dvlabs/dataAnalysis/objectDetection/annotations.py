@@ -52,7 +52,7 @@ class Annotations:
         return
 
     def read_yolo(self, img_dir, annotations_dir, class_file):
-        print('Passing YOLO data...')
+        print('Parsing YOLO data...')
 
         class_names = read_lines(class_file)
 
@@ -110,6 +110,8 @@ class Annotations:
         return
 
     def to_yolo(self, save_dir, class_names_path):
+        print('Converting to YOLO...')
+
         os.makedirs(save_dir, exist_ok=True)
         self.write_class_names(class_names_path)
 
@@ -132,7 +134,7 @@ class Annotations:
                             f"{obj[yolo_bb_format.W]} {obj[yolo_bb_format.H]}")
 
     def read_pascal(self, img_dir, annotations_dir):
-        print('Passing Pascal VOC data...')
+        print('Parsing Pascal VOC data...')
 
         class_names = []
 
@@ -203,6 +205,8 @@ class Annotations:
         return
 
     def to_pascal(self, save_dir, class_names_path=None):
+        print('Converting to Pascal VOC...')
+
         os.makedirs(save_dir, exist_ok=True)
         if class_names_path is not None:
             self.write_class_names(class_names_path)
@@ -263,7 +267,7 @@ class Annotations:
                 f.write(xmlstr)
 
     def read_coco(self, img_dir, json_file_path):
-        print('Passing COCO data...')
+        print('Parsing COCO data...')
 
         root = dict_from_json(json_file_path)
 
@@ -329,6 +333,8 @@ class Annotations:
         return
 
     def to_coco(self, save_dir=None, json_filename=None):
+        print('Converting to COCO...')
+
         anno_out = dict()
         anno_out['info'] = {
             "year": "",
