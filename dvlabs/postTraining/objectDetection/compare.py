@@ -9,12 +9,19 @@ class Compare:
     def __init__(self, analysis_obj1, analysis_obj2):
 
         assert analysis_obj1.gt_annos == analysis_obj2.gt_annos, "The analysis objects belong to different datasets."
+        assert analysis_obj1.class_names == analysis_obj2.class_names,\
+            "The analysis objects belong to different datasets."
 
         self.anal_obj1 = analysis_obj1
         self.anal_obj2 = analysis_obj2
 
     def view(self, resolution=(1280, 720), save_dir=None, maintain_ratio=True, filter_classes=[],
              iou_thres=1, show_labels=True, show_conf=True):
+
+        assert resolution[0] >= 1 and resolution[1] >= 1, "Resolution cannot be less than 1."
+        assert (iou_thres >= 0) and (iou_thres <= 1), "IOU threshold must be between 0-1."
+        for f_cls in filter_classes:
+            assert f_cls in self.anal_obj1.class_names, "Filter class name not present in dataset."
 
         print("Creating View...")
 
