@@ -200,7 +200,7 @@ class Analyse:
                     samples += 1
 
             if samples == 0:
-                avg_IOUs.append(None)
+                avg_IOUs.append(0)
             else:
                 avg_IOUs.append(sum_iou/samples)
 
@@ -210,12 +210,10 @@ class Analyse:
                 for img_id, avg_iou in zip(image_ids, avg_IOUs):
                     img_path = self.gt_annos[img_id][lib_annotation_format.IMG_PATH]
                     img_name = os.path.basename(img_path)
-                    if avg_iou is not None:
-                        f.write(f"{img_name} {round(avg_iou, 3)}\n")
-                    else:
-                        f.write(f"{img_name} {None}\n")
 
-        plt.plot(range(0, len(image_ids)), avg_IOUs)
+                    f.write(f"{img_name} {round(avg_iou, 3)}\n")
+
+        plt.bar(range(0, len(image_ids)), avg_IOUs)
         plt.title('Average IOU per Sample')
         plt.xlabel('Samples')
         plt.ylabel('Average IOU')
